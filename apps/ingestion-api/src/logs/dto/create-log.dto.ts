@@ -1,8 +1,8 @@
 import { Type } from "class-transformer"
-import { IsDate, IsEnum, IsJSON, IsObject, IsOptional, IsString } from "class-validator"
+import { IsDate, IsEnum, IsJSON, IsObject, IsOptional, IsString, MaxLength } from "class-validator"
 
 export enum TaskLevel {
-    LOG = "LOG",
+    WARN = "WARN",
     INFO = "INFO",
     ERROR = "ERROR"
 }
@@ -12,14 +12,12 @@ export class CreateLogsDto {
     level!: TaskLevel
 
     @IsString()
+    @MaxLength(255)
     message!: string
 
     @IsString()
+    @MaxLength(100)
     service!: string
-
-    @IsDate()  
-    @Type(() => Date)
-    timestamp!: Date
 
     @IsObject()
     @IsOptional()
